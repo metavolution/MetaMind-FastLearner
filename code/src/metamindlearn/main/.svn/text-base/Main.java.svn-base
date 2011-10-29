@@ -1,0 +1,46 @@
+package metamindlearn.main;
+
+import metamindlearn.core.*;
+import metamindlearn.gui.*;
+
+public class Main {
+
+	public static GlobalData global = new GlobalData();
+	
+	public static void main(String[] args) {
+
+		System.out.println("program start");
+		
+		
+		global.infomap.addNode("Biologie");
+		global.infomap.addNode("Informatik");
+		global.infomap.addNode("Physik");
+		global.infomap.addNode("Chemie");
+		global.infomap.addNode("Maschinenbau");
+		global.infomap.addNode("Neurowissenschaft");
+		
+		global.infomap.addNode("Romantik");
+		global.infomap.addNode("Liebe");
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		try{
+		Thread.sleep(2000);
+		}
+		catch (Exception e){};
+
+		//infomapframe.setVisible(false);
+		System.out.println("program end");
+		
+	
+	
+	}
+
+}

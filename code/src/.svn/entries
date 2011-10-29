@@ -1,0 +1,41 @@
+9
+
+dir
+12
+svn+ssh://svnuser@rainsrv/store/svn/testrepo/MetaMindLearn/src
+svn+ssh://svnuser@rainsrv/store/svn/testrepo
+
+
+
+2009-01-22T16:49:52.449350Z
+11
+rain
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+d10dd7ea-6386-49f0-b2ad-c2d8e584b153
+
+
+
+
+
+
+0
+
+metamindlearn
+dir
+
+rainlib
+dir
+

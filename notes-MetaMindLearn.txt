@@ -1,0 +1,71 @@
+TODO:
+
++content autoscroll option
++pos layout of toolbar and InfoMap View
++better parsing and format of wikitext
+-etymologie
+-tocnodes with subnodes (linkwords)
+
+-read keywords from txt file
+-onclick nodelabel get+show wikitext + show subnodes graph for keyword
+-show mainwords, inhaltsverzeichnis with submainwords
++make clicks on links in contentviewer work
+
+
+IDEAS:
+
+multiple windows
++scrollable infomap - swing
++contenttext display - get from wikipedia
++currentpos centered - java2d
++imagecontent - google image
++infomap overview
+
++history of visited infonodes and taken paths
+
++brainstorming session / typing in of words
++show words with option to assign category
++drag and drop words into existing mindmap, define relations
++fill content of each node with information from wikipedia, google(image)
++find potential new words from wikipedia/google
++nodes have:
+-keyword
+-definition
+-categories
+-realtednodes
+-subnodes
+-related images/links
+
+-learnstatistics
+-generate test questions and flashcards/info bullets
+
++enhanced e-learning interface
+
+
+
+
+
+ANALYSIS:
+
+
+
+
+DESIGN:
+
+Objektlist:
+
+
+
+
+
+
+
+
+IMPLEMENTATION:
+
+
+
+
+
+
+TESTING:

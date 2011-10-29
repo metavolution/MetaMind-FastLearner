@@ -1,0 +1,159 @@
+package metamindlearn.core;
+
+import metamindlearn.main.*;
+
+import java.net.*;
+import java.io.*;
+
+
+public class InfoNode extends Node {
+
+	public InfoNodeList parentnodes = new InfoNodeList();
+	public InfoNodeList subnodes = new InfoNodeList();
+	public InfoNodeList tocnodes = new InfoNodeList();
+	public InfoNodeList peernodes = new InfoNodeList();
+	public InfoNodeList referencenodes = new InfoNodeList();
+	
+	String wikistring = new String();
+	public String wikitext = new String();
+	String contenttext = new String();
+	
+	boolean mainnode = false;
+	boolean wikicontent = false;
+
+	InfoNodeList mainwords = new InfoNodeList();
+	InfoNodeList wikilinkwords = new InfoNodeList();
+	InfoNodeList categories = new InfoNodeList();
+	
+	public void addsubNode(String keyword_p) {
+		InfoNode node = subnodes.addNode(keyword_p);
+		node.parentnodes.nodes.add(this);
+	}
+	
+	public void parsewikicontent() {
+		
+		//---- parse main text
+		//int begin = wikistring.indexOf("<!-- start content -->"); 
+		//int end = wikistring.indexOf("<div class=\"printfooter\">");
+		int begin = wikistring.indexOf("<!-- bodytext -->"); 
+		int end = wikistring.indexOf("<div class=\"printfooter\">");
+		
+		if(begin > 0 && end > 0) {
+			wikitext = wikistring.substring(begin, end);
+		}
+		
+		//---- parse subtopics
+		int ipos = 0;
+		int h2pos = 0;
+		int h3pos = 0;
+		int plen = 0;
+		String tmpstr = new String();
+		String parsestr = new String();
+		String keyword = new String();
+		
+		tmpstr = wikitext;
+		parsestr = "title=\"";
+		plen = parsestr.length();
+		
+		
+		do {
+			tmpstr = tmpstr.substring(ipos);
+			
+			begin = tmpstr.indexOf(parsestr);
+			if( !(begin > 0)) break;
+			end = tmpstr.indexOf("\"",begin+plen);
+			
+
+			keyword = tmpstr.substring(begin+plen, end);
+			System.out.println(keyword);
+			
+			
+			subnodes.addNode(keyword);
+			subnodes.nodes.lastElement().parentnodes.nodes.add(this);
+			
+			ipos = end;
+		} while (true);	
+		
+		
+/*		
+		tmpstr = wikitext;
+		parsestr = "<p><a name=\"";
+		plen = parsestr.length();
+		
+		
+		do {
+			tmpstr = tmpstr.substring(ipos);
+			
+			begin = tmpstr.indexOf(parsestr);
+			if( !(begin > 0)) break;
+			end = tmpstr.indexOf("\"",begin+plen);
+			
+			h2pos = tmpstr.indexOf("<h2>",begin);
+			h3pos = tmpstr.indexOf("<h3>",begin);
+			
+			keyword = tmpstr.substring(begin+plen, end);
+			System.out.println(keyword);
+			
+			if(h3pos < h2pos) {
+				
+			} else {
+					
+			}
+			
+			subnodes.addNode(keyword);
+			
+			ipos = end;
+		} while (true);	
+	*/
+	
+	}
+	
+	public void getwikitext() {
+		
+		String urlstr = Main.global.wikiurl+keyword;
+		
+		try {
+			urlstr = urlstr.replaceAll(" ", "_");
+			Main.global.debug.print("opening: "+urlstr);
+			URL url = new URL(urlstr);
+			URLConnection urlcon;
+
+            urlcon = url.openConnection();
+		    int size = urlcon.getContentLength();
+		    Main.global.debug.print("Size:"+size);
+
+			
+			BufferedReader in = 
+			new BufferedReader(new InputStreamReader(url.openStream()));
+	
+
+			String inputLine;
+			StringBuffer strbuf = new StringBuffer(size);
+
+			while ((inputLine = in.readLine()) != null) {
+			    strbuf.append(inputLine);
+			}
+			wikistring = strbuf.toString();
+			in.close();
+	
+			
+			
+			
+		} catch (Exception e) {};
+
+		
+	}
+	
+	public void displayNode() {
+		System.out.println(getkeyword());
+		
+		getwikitext();
+		parsewikicontent();
+		Main.global.nodegraphframe.render(this);
+		Main.global.htmlview.update(this);
+		Main.global.history.visitednodes.nodes.add(this);
+	}
+	
+	
+	
+}
